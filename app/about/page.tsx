@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/page/PageHeader";
-import { FIRM, OFFICES, PRACTICE_AREAS } from "@/lib/site";
+import { FIRM, FIRM_NUMBERS, OFFICES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Our Chambers | Crestview Chambers",
@@ -24,13 +24,6 @@ const PRINCIPLES = [
   },
 ];
 
-const NUMBERS = [
-  { value: String(FIRM.founded), label: "Founded, London" },
-  { value: String(OFFICES.length), label: "Principal seats" },
-  { value: String(PRACTICE_AREAS.length), label: "Practice disciplines" },
-  { value: "Band 1", label: "Chambers Global ranking" },
-];
-
 export default function AboutPage() {
   return (
     <>
@@ -42,7 +35,7 @@ export default function AboutPage() {
 
       <section aria-label="Chamber at a glance" className="border-t border-rule">
         <dl className="grid grid-cols-2 gap-px bg-rule lg:grid-cols-4">
-          {NUMBERS.map((item) => (
+          {FIRM_NUMBERS.map((item) => (
             <div key={item.label} className="bg-paper px-5 py-7">
               <dt className="sr-only">{item.label}</dt>
               <dd className="font-serif text-2xl font-bold text-ink sm:text-3xl">

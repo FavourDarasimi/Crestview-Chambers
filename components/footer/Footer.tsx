@@ -54,7 +54,7 @@ export default function Footer() {
                   href={`/practice/${area.slug}`}
                   className="text-sm text-muted transition-colors hover:text-ink"
                 >
-                  {area.title.replace(/ &.*/, "")}
+                  {area.short}
                 </Link>
               </li>
             ))}

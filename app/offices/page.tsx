@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/page/PageHeader";
-import { FIRM, OFFICES } from "@/lib/site";
+import { FIRM, OFFICES, telHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Global Offices | Crestview Chambers",
   description:
     "Four principal seats — London, New York, Geneva and Singapore — with switchboard numbers, addresses and business-hour time zones.",
 };
-
-function toHref(phone: string) {
-  return `tel:${phone.replace(/[^+\d]/g, "")}`;
-}
 
 export default function OfficesPage() {
   return (
@@ -46,7 +42,7 @@ export default function OfficesPage() {
             </address>
 
             <a
-              href={toHref(office.phone)}
+              href={telHref(office.phone)}
               className="mt-4 inline-block font-mono text-sm text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
             >
               {office.phone}

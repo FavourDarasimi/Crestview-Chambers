@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/page/PageHeader";
-import { FIRM, OFFICES, PRACTICE_AREAS } from "@/lib/site";
+import { FIRM, OFFICES, PRACTICE_AREAS, telHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Book a Consultation | Crestview Chambers",
@@ -28,9 +28,6 @@ const STEPS = [
   },
 ];
 
-function toHref(phone: string) {
-  return `tel:${phone.replace(/[^+\d]/g, "")}`;
-}
 
 export default function ContactPage() {
   return (
@@ -85,7 +82,7 @@ export default function ContactPage() {
               </dt>
               <dd className="mt-2">
                 <a
-                  href={toHref(FIRM.switchboard)}
+                  href={telHref(FIRM.switchboard)}
                   className="font-mono text-lg text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
                 >
                   {FIRM.switchboard}
@@ -164,7 +161,7 @@ export default function ContactPage() {
               {office.city}
               <span className="mx-2 text-whisper">•</span>
               <a
-                href={toHref(office.phone)}
+                href={telHref(office.phone)}
                 className="font-mono text-xs text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
               >
                 {office.phone}

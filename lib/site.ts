@@ -12,6 +12,8 @@ type PracticeIcon = typeof JusticeScale01Icon;
 export type PracticeArea = {
   slug: string;
   title: string;
+  /** Column and card label where the full title is too long to fit. */
+  short: string;
   /** Mega-menu and card blurb. */
   blurb: string;
   /** Page lede. */
@@ -25,6 +27,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
   {
     slug: "corporate-ma",
     title: "Corporate & Cross-Border M&A",
+    short: "Corporate",
     blurb:
       "Complex mergers, sovereign investments, and institutional governance.",
     summary:
@@ -42,6 +45,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
   {
     slug: "dispute-resolution",
     title: "Commercial Dispute & Litigation",
+    short: "Disputes",
     blurb:
       "Supreme court representation, LCIA arbitration, and white-collar defense.",
     summary:
@@ -64,6 +68,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
   {
     slug: "banking-finance",
     title: "Banking & Financial Regulation",
+    short: "Banking",
     blurb:
       "Structured finance, capital markets, and international banking compliance.",
     summary:
@@ -81,6 +86,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
   {
     slug: "intellectual-property",
     title: "Intellectual Property & Technology",
+    short: "Intellectual Property",
     blurb:
       "Patents, technology transactions, and emerging AI regulatory frameworks.",
     summary:
@@ -98,6 +104,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
   {
     slug: "private-wealth",
     title: "Private Wealth & Sovereign Estates",
+    short: "Private Wealth",
     blurb:
       "Family office preservation, trusts, and multinational estate planning.",
     summary:
@@ -115,6 +122,7 @@ export const PRACTICE_AREAS: PracticeArea[] = [
   {
     slug: "regulatory-compliance",
     title: "Regulatory Compliance & Risk",
+    short: "Regulatory Compliance",
     blurb:
       "Cross-border antitrust, trade sanctions compliance, and crisis management.",
     summary:
@@ -200,3 +208,158 @@ export const FIRM = {
   switchboard: "+44 20 7946 0100",
   founded: 1987,
 };
+
+export type Attorney = {
+  name: string;
+  role: string;
+  practiceSlug: string;
+  admitted: string;
+  focus: string;
+  email: string;
+};
+
+export const ATTORNEYS: Attorney[] = [
+  {
+    name: "Helena Marchetti",
+    role: "Senior Partner",
+    practiceSlug: "corporate-ma",
+    admitted: "England & Wales, New York",
+    focus:
+      "Contested takeovers and sovereign participation in outbound European acquisitions.",
+    email: "h.marchetti@crestviewchambers.com",
+  },
+  {
+    name: "Daniel Okonjo",
+    role: "Partner",
+    practiceSlug: "dispute-resolution",
+    admitted: "England & Wales, Singapore",
+    focus:
+      "Institutional arbitration and appellate advocacy in cross-border fraud and asset recovery.",
+    email: "d.okonjo@crestviewchambers.com",
+  },
+  {
+    name: "Clare Ashworth",
+    role: "Partner",
+    practiceSlug: "banking-finance",
+    admitted: "England & Wales",
+    focus:
+      "Structured credit, securitisation programmes and supervisory engagement with the PRA.",
+    email: "c.ashworth@crestviewchambers.com",
+  },
+  {
+    name: "Yusuf Demir",
+    role: "Partner",
+    practiceSlug: "intellectual-property",
+    admitted: "England & Wales, European Patent Office",
+    focus:
+      "Patent litigation, standard-essential licensing, and liability allocation in AI procurement.",
+    email: "y.demir@crestviewchambers.com",
+  },
+  {
+    name: "Isabelle Roux",
+    role: "Partner",
+    practiceSlug: "private-wealth",
+    admitted: "England & Wales, Geneva",
+    focus:
+      "Succession of control in multi-jurisdiction family enterprises and foundation structures.",
+    email: "i.roux@crestviewchambers.com",
+  },
+  {
+    name: "Gavin Whitfield",
+    role: "Partner",
+    practiceSlug: "regulatory-compliance",
+    admitted: "England & Wales, New York",
+    focus:
+      "Sanctions designation response, export classification and parallel internal investigations.",
+    email: "g.whitfield@crestviewchambers.com",
+  },
+];
+
+export function initials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("");
+}
+
+/** Display figures derived from the catalog, so the home page and the
+ *  chambers page cannot report different numbers about the same fiction. */
+export const FIRM_NUMBERS = [
+  { value: String(FIRM.founded), label: "Founded, London" },
+  { value: String(OFFICES.length), label: "Principal seats" },
+  { value: String(PRACTICE_AREAS.length), label: "Practice disciplines" },
+  { value: "Band 1", label: "Chambers Global ranking" },
+];
+
+export function telHref(phone: string) {
+  return `tel:${phone.replace(/[^+\d]/g, "")}`;
+}
+
+export type Brief = {
+  title: string;
+  category: string;
+  date: string;
+  summary: string;
+  readMinutes: number;
+};
+
+// Dates are ISO so they sort; rendered with an explicit locale for stability.
+export const BRIEFS: Brief[] = [
+  {
+    title: "Designation mid-transaction: what the closing conditions do not cover",
+    category: "Regulatory Risk",
+    date: "2026-10-28",
+    summary:
+      "Most acquisition agreements allocate sanctions risk to the buyer between signing and closing. Few define what happens when the target's counterparty is designated during a funded earn-out.",
+    readMinutes: 9,
+  },
+  {
+    title: "Model liability under the EU AI Act after the first conformity decisions",
+    category: "Technology",
+    date: "2026-10-09",
+    summary:
+      "Deployer obligations are now settled in form but not in practice. The procurement terms that survive scrutiny are the ones that allocate verification cost, not those that allocate fault.",
+    readMinutes: 12,
+  },
+  {
+    title: "Non-dom residence: three years of case law in one decision",
+    category: "Private Wealth",
+    date: "2026-09-22",
+    summary:
+      "The tribunal's treatment of workplace attendance rewrites the practical test for families who assumed continuity of residence was a matter of days counted.",
+    readMinutes: 7,
+  },
+  {
+    title: "Interim relief in LCIA arbitrations seated outside London",
+    category: "Dispute Resolution",
+    date: "2026-08-30",
+    summary:
+      "Emergency arbitrator awards remain difficult to enforce where the assets sit in jurisdictions that have not settled their approach to the seat's supervisory court.",
+    readMinutes: 11,
+  },
+  {
+    title: "Liquidity rules and the securitisation retention exemption",
+    category: "Banking & Finance",
+    date: "2026-08-14",
+    summary:
+      "Synthetic risk transfer structures are being re-underwritten against a retention test the supervisory guidance never formally amended.",
+    readMinutes: 10,
+  },
+  {
+    title: "Minority protections that a board can actually enforce",
+    category: "Corporate & M&A",
+    date: "2026-07-31",
+    summary:
+      "Reserved matters clauses routinely fail because the veto attaches to a decision the board is free to restructure. drafting the obligation as a funding condition performs better.",
+    readMinutes: 8,
+  },
+];
+
+export function formatBriefDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}

@@ -1,86 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/page/PageHeader";
-import { FIRM, getPracticeArea } from "@/lib/site";
+import { ATTORNEYS, FIRM, getPracticeArea, initials } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Attorneys | Crestview Chambers",
   description:
     "Senior partners across cross-border transactions, commercial litigation and arbitration, financial regulation, technology, private wealth and regulatory risk.",
 };
-
-type Attorney = {
-  name: string;
-  role: string;
-  practiceSlug: string;
-  admitted: string;
-  focus: string;
-  email: string;
-};
-
-const ATTORNEYS: Attorney[] = [
-  {
-    name: "Helena Marchetti",
-    role: "Senior Partner",
-    practiceSlug: "corporate-ma",
-    admitted: "England & Wales, New York",
-    focus:
-      "Contested takeovers and sovereign participation in outbound European acquisitions.",
-    email: "h.marchetti@crestviewchambers.com",
-  },
-  {
-    name: "Daniel Okonjo",
-    role: "Partner",
-    practiceSlug: "dispute-resolution",
-    admitted: "England & Wales, Singapore",
-    focus:
-      "Institutional arbitration and appellate advocacy in cross-border fraud and asset recovery.",
-    email: "d.okonjo@crestviewchambers.com",
-  },
-  {
-    name: "Clare Ashworth",
-    role: "Partner",
-    practiceSlug: "banking-finance",
-    admitted: "England & Wales",
-    focus:
-      "Structured credit, securitisation programmes and supervisory engagement with the PRA.",
-    email: "c.ashworth@crestviewchambers.com",
-  },
-  {
-    name: "Yusuf Demir",
-    role: "Partner",
-    practiceSlug: "intellectual-property",
-    admitted: "England & Wales, European Patent Office",
-    focus:
-      "Patent litigation, standard-essential licensing, and liability allocation in AI procurement.",
-    email: "y.demir@crestviewchambers.com",
-  },
-  {
-    name: "Isabelle Roux",
-    role: "Partner",
-    practiceSlug: "private-wealth",
-    admitted: "England & Wales, Geneva",
-    focus:
-      "Succession of control in multi-jurisdiction family enterprises and foundation structures.",
-    email: "i.roux@crestviewchambers.com",
-  },
-  {
-    name: "Gavin Whitfield",
-    role: "Partner",
-    practiceSlug: "regulatory-compliance",
-    admitted: "England & Wales, New York",
-    focus:
-      "Sanctions designation response, export classification and parallel internal investigations.",
-    email: "g.whitfield@crestviewchambers.com",
-  },
-];
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("");
-}
 
 export default function AttorneysPage() {
   return (
