@@ -11,59 +11,8 @@ import {
   Menu01Icon,
   Cancel01Icon,
   Briefcase01Icon,
-  GavelIcon,
-  CourtHouseIcon,
-  LegalDocument01Icon,
-  Shield01Icon,
 } from "@hugeicons/core-free-icons";
-
-// Practice areas catalog with monochrome styling
-const PRACTICE_AREAS = [
-  {
-    title: "Corporate & Cross-Border M&A",
-    desc: "Complex mergers, sovereign investments, and institutional governance.",
-    href: "/practice/corporate-ma",
-    icon: Briefcase01Icon,
-  },
-  {
-    title: "Commercial Dispute & Litigation",
-    desc: "Supreme court representation, LCIA arbitration, and white-collar defense.",
-    href: "/practice/dispute-resolution",
-    icon: GavelIcon,
-  },
-  {
-    title: "Banking & Financial Regulation",
-    desc: "Structured finance, capital markets, and international banking compliance.",
-    href: "/practice/banking-finance",
-    icon: CourtHouseIcon,
-  },
-  {
-    title: "Intellectual Property & Technology",
-    desc: "Patents, technology transactions, and emerging AI regulatory frameworks.",
-    href: "/practice/intellectual-property",
-    icon: LegalDocument01Icon,
-  },
-  {
-    title: "Private Wealth & Sovereign Estates",
-    desc: "Family office preservation, trusts, and multinational estate planning.",
-    href: "/practice/private-wealth",
-    icon: Shield01Icon,
-  },
-  {
-    title: "Regulatory Compliance & Risk",
-    desc: "Cross-border antitrust, trade sanctions compliance, and crisis management.",
-    href: "/practice/regulatory-compliance",
-    icon: JusticeScale01Icon,
-  },
-];
-
-const NAV_LINKS = [
-  { label: "Practice Areas", href: "/practice", hasDropdown: true },
-  { label: "Our Chambers", href: "/about" },
-  { label: "Attorneys", href: "/attorneys" },
-  { label: "Insights & Briefs", href: "/insights" },
-  { label: "Global Offices", href: "/offices" },
-];
+import { MOBILE_NAV_LINKS, NAV_LINKS, PRACTICE_AREAS } from "@/lib/site";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -230,7 +179,7 @@ export default function Navbar() {
                                 onClick={() => setPracticeOpen(false)}
                                 className="group flex items-center gap-1 text-xs font-semibold text-black hover:text-zinc-600 transition-colors"
                               >
-                                <span>View all 24 practices</span>
+                                <span>View all {PRACTICE_AREAS.length} practices</span>
                                 <HugeiconsIcon
                                   icon={ArrowRight01Icon}
                                   size={14}
@@ -243,16 +192,16 @@ export default function Navbar() {
 
                             {/* 2-Column Practice Areas Grid */}
                             <div className="grid grid-cols-2 gap-3">
-                              {PRACTICE_AREAS.map((item) => (
+                              {PRACTICE_AREAS.map((area) => (
                                 <Link
-                                  key={item.title}
-                                  href={item.href}
+                                  key={area.slug}
+                                  href={`/practice/${area.slug}`}
                                   onClick={() => setPracticeOpen(false)}
                                   className="group flex items-start gap-3.5 p-3 rounded-xl hover:bg-zinc-50 border border-transparent hover:border-zinc-200 transition-all duration-200"
                                 >
                                   <div className="w-9 h-9 rounded-lg bg-zinc-100 group-hover:bg-black text-zinc-900 group-hover:text-white flex items-center justify-center shrink-0 transition-colors mt-0.5">
                                     <HugeiconsIcon
-                                      icon={item.icon}
+                                      icon={area.icon}
                                       size={18}
                                       color="currentColor"
                                       strokeWidth={1.8}
@@ -260,10 +209,10 @@ export default function Navbar() {
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <h4 className="text-sm font-semibold text-black transition-colors">
-                                      {item.title}
+                                      {area.title}
                                     </h4>
                                     <p className="text-xs text-zinc-500 line-clamp-2 mt-0.5 leading-relaxed">
-                                      {item.desc}
+                                      {area.blurb}
                                     </p>
                                   </div>
                                 </Link>
@@ -424,15 +373,15 @@ export default function Navbar() {
                         transition={{ duration: 0.25 }}
                         className="divide-y divide-zinc-100 bg-white"
                       >
-                        {PRACTICE_AREAS.map((item) => (
+                        {PRACTICE_AREAS.map((area) => (
                           <Link
-                            key={item.title}
-                            href={item.href}
+                            key={area.slug}
+                            href={`/practice/${area.slug}`}
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-start gap-3 p-3 hover:bg-zinc-50 transition-colors"
                           >
                             <HugeiconsIcon
-                              icon={item.icon}
+                              icon={area.icon}
                               size={16}
                               color="#71717a"
                               strokeWidth={1.8}
@@ -440,10 +389,10 @@ export default function Navbar() {
                             />
                             <div>
                               <p className="text-xs font-semibold text-black">
-                                {item.title}
+                                {area.title}
                               </p>
                               <p className="text-[11px] text-zinc-500 line-clamp-1">
-                                {item.desc}
+                                {area.blurb}
                               </p>
                             </div>
                           </Link>
@@ -455,15 +404,16 @@ export default function Navbar() {
 
                 {/* Other Nav Links */}
                 <div className="space-y-1">
-                  {[
-                    { label: "Our Chambers & History", href: "/about" },
-                    { label: "Partners & Attorneys", href: "/attorneys" },
-                    { label: "Insights, Briefs & Rulings", href: "/insights" },
-                    { label: "Global Offices & Locations", href: "/offices" },
-                    { label: "Secure Client Portal", href: "/portal" },
-                  ].map((navItem) => (
+                  <Link
+                    href="/practice"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-800 hover:text-black hover:bg-zinc-50 transition-colors"
+                  >
+                    All Practice Areas
+                  </Link>
+                  {MOBILE_NAV_LINKS.map((navItem) => (
                     <Link
-                      key={navItem.label}
+                      key={navItem.href}
                       href={navItem.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className="block px-3.5 py-2.5 rounded-lg text-sm font-medium text-zinc-800 hover:text-black hover:bg-zinc-50 transition-colors"
