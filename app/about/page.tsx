@@ -40,15 +40,15 @@ export default function AboutPage() {
         lede={`Crestview Chambers was founded in ${FIRM.founded} on the premise that institutional clients are better served by a short chain of senior decision-makers than by a large one. We have grown deliberately and remain partnership-funded.`}
       />
 
-      <section aria-label="Chamber at a glance" className="border-t border-zinc-200">
-        <dl className="grid grid-cols-2 gap-px bg-zinc-200 lg:grid-cols-4">
+      <section aria-label="Chamber at a glance" className="border-t border-rule">
+        <dl className="grid grid-cols-2 gap-px bg-rule lg:grid-cols-4">
           {NUMBERS.map((item) => (
-            <div key={item.label} className="bg-white px-5 py-7">
+            <div key={item.label} className="bg-paper px-5 py-7">
               <dt className="sr-only">{item.label}</dt>
-              <dd className="font-serif text-2xl font-bold text-black sm:text-3xl">
+              <dd className="font-serif text-2xl font-bold text-ink sm:text-3xl">
                 {item.value}
               </dd>
-              <p className="mt-2 text-[11px] tracking-[0.14em] text-zinc-500 uppercase">
+              <p className="mt-2 text-[11px] tracking-[0.14em] text-faint uppercase">
                 {item.label}
               </p>
             </div>
@@ -62,7 +62,7 @@ export default function AboutPage() {
       >
         <h2
           id="how-we-work"
-          className="font-serif text-xl leading-snug font-semibold text-balance text-black sm:text-2xl"
+          className="font-serif text-xl leading-snug font-semibold text-balance text-ink sm:text-2xl"
         >
           How we work
         </h2>
@@ -70,16 +70,16 @@ export default function AboutPage() {
           {PRINCIPLES.map((principle, index) => (
             <div
               key={principle.title}
-              className="grid gap-3 border-t border-zinc-200 pt-6 sm:grid-cols-[auto_1fr] sm:gap-8"
+              className="grid gap-3 border-t border-rule pt-6 sm:grid-cols-[auto_1fr] sm:gap-8"
             >
-              <span className="font-mono text-xs text-zinc-400">
+              <span className="font-mono text-xs text-faint">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div>
-                <h3 className="text-base font-semibold text-black">
+                <h3 className="text-base font-semibold text-ink">
                   {principle.title}
                 </h3>
-                <p className="mt-2 max-w-[62ch] text-sm leading-relaxed text-pretty text-zinc-600">
+                <p className="mt-2 max-w-[62ch] text-sm leading-relaxed text-pretty text-muted">
                   {principle.body}
                 </p>
               </div>
@@ -88,28 +88,28 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="seats" className="border-t border-zinc-200 py-14">
+      <section aria-labelledby="seats" className="border-t border-rule py-14">
         <h2
           id="seats"
-          className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-900 sm:text-[11px]"
+          className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]"
         >
           Where we sit
         </h2>
         <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {OFFICES.map((office) => (
             <li key={office.city}>
-              <p className="font-serif text-lg font-semibold text-black">
+              <p className="font-serif text-lg font-semibold text-ink">
                 {office.city}
               </p>
-              <p className="mt-1 text-sm text-zinc-600">{office.role}</p>
+              <p className="mt-1 text-sm text-muted">{office.role}</p>
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-sm text-zinc-500">
+        <p className="mt-8 text-sm text-faint">
           Full addresses and switchboards are on the{" "}
           <Link
             href="/offices"
-            className="font-medium text-black underline underline-offset-4 hover:no-underline"
+            className="font-medium text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
           >
             Global Offices
           </Link>{" "}

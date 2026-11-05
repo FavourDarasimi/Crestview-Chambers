@@ -86,28 +86,28 @@ export default function InsightsPage() {
         lede="We publish rarely and only where the position has changed. Each brief states the practical consequence in its first paragraph, because that is what a non-executive director needs before a meeting."
       />
 
-      <ul className="divide-y divide-zinc-200 border-y border-zinc-200">
+      <ul className="divide-y divide-rule border-y border-rule">
         {BRIEFS.map((brief) => (
           <li
             key={brief.date + brief.title}
             className="grid gap-4 py-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:gap-10"
           >
             <div className="flex flex-row gap-4 sm:flex-col sm:gap-3">
-              <p className="text-[11px] tracking-[0.14em] text-zinc-900 uppercase">
+              <p className="text-[11px] tracking-[0.14em] text-ink-soft uppercase">
                 {brief.category}
               </p>
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-muted">
                 {formatDate(brief.date)}
-                <span className="mx-2 text-zinc-300">•</span>
+                <span className="mx-2 text-whisper">•</span>
                 {brief.readMinutes} min
               </p>
             </div>
 
             <div>
-              <h2 className="font-serif text-lg leading-snug font-semibold text-balance text-black sm:text-xl">
+              <h2 className="font-serif text-lg leading-snug font-semibold text-balance text-ink sm:text-xl">
                 {brief.title}
               </h2>
-              <p className="mt-3 max-w-[68ch] text-sm leading-relaxed text-pretty text-zinc-600">
+              <p className="mt-3 max-w-[68ch] text-sm leading-relaxed text-pretty text-muted">
                 {brief.summary}
               </p>
             </div>
@@ -115,11 +115,11 @@ export default function InsightsPage() {
         ))}
       </ul>
 
-      <div className="mt-12 border border-zinc-200 bg-zinc-50 p-6 sm:p-8">
-        <h2 className="font-serif text-lg font-semibold text-black">
+      <div className="mt-12 border border-accent/25 bg-accent-tint p-6 sm:p-8">
+        <h2 className="font-serif text-lg font-semibold text-ink">
           Full briefs are circulated to clients
         </h2>
-        <p className="mt-3 max-w-[64ch] text-sm leading-relaxed text-zinc-600">
+        <p className="mt-3 max-w-[64ch] text-sm leading-relaxed text-muted">
           We do not publish the working papers, because several are prepared
           against live instructions and would read differently without the
           privileged context. If a subject above is relevant to a decision you
@@ -127,7 +127,7 @@ export default function InsightsPage() {
         </p>
         <a
           href={`mailto:${FIRM.email}?subject=Request%20for%20full%20brief`}
-          className="mt-5 inline-block text-sm font-semibold text-black underline underline-offset-4 hover:no-underline"
+          className="mt-5 inline-block text-sm font-semibold text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
         >
           {FIRM.email}
         </a>

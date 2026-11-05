@@ -91,43 +91,43 @@ export default function AttorneysPage() {
         lede="Every mandate is led by one of the following. We publish the partner rather than the department, because that is the person who will be in the room when the decision is made."
       />
 
-      <ul className="grid gap-px border border-zinc-200 bg-zinc-200 lg:grid-cols-2">
+      <ul className="grid gap-px border border-rule bg-rule lg:grid-cols-2">
         {ATTORNEYS.map((attorney) => {
           const practice = getPracticeArea(attorney.practiceSlug);
 
           return (
-            <li key={attorney.email} className="bg-white p-6 sm:p-8">
+            <li key={attorney.email} className="bg-paper p-6 sm:p-8">
               <div className="flex items-start gap-5">
                 <span
                   aria-hidden="true"
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-black font-serif text-sm font-bold text-white"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-ink font-serif text-sm font-bold text-on-ink"
                 >
                   {initials(attorney.name)}
                 </span>
                 <div className="min-w-0">
-                  <h2 className="font-serif text-lg leading-snug font-semibold text-black sm:text-xl">
+                  <h2 className="font-serif text-lg leading-snug font-semibold text-ink sm:text-xl">
                     {attorney.name}
                   </h2>
-                  <p className="mt-1 text-[11px] tracking-[0.14em] text-zinc-500 uppercase">
+                  <p className="mt-1 text-[11px] tracking-[0.14em] text-faint uppercase">
                     {attorney.role}
                   </p>
                 </div>
               </div>
 
-              <p className="mt-5 max-w-[54ch] text-sm leading-relaxed text-pretty text-zinc-600">
+              <p className="mt-5 max-w-[54ch] text-sm leading-relaxed text-pretty text-muted">
                 {attorney.focus}
               </p>
 
-              <dl className="mt-6 space-y-3 border-t border-zinc-200 pt-5 text-xs">
+              <dl className="mt-6 space-y-3 border-t border-rule pt-5 text-xs">
                 <div className="flex gap-3">
-                  <dt className="w-24 shrink-0 tracking-[0.12em] text-zinc-400 uppercase">
+                  <dt className="w-24 shrink-0 tracking-[0.12em] text-faint uppercase">
                     Practice
                   </dt>
-                  <dd className="min-w-0 text-zinc-800">
+                  <dd className="min-w-0 text-ink-soft">
                     {practice ? (
                       <Link
                         href={`/practice/${practice.slug}`}
-                        className="underline underline-offset-4 hover:no-underline"
+                        className="text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
                       >
                         {practice.title}
                       </Link>
@@ -135,19 +135,19 @@ export default function AttorneysPage() {
                   </dd>
                 </div>
                 <div className="flex gap-3">
-                  <dt className="w-24 shrink-0 tracking-[0.12em] text-zinc-400 uppercase">
+                  <dt className="w-24 shrink-0 tracking-[0.12em] text-faint uppercase">
                     Admitted
                   </dt>
-                  <dd className="min-w-0 text-zinc-800">{attorney.admitted}</dd>
+                  <dd className="min-w-0 text-ink-soft">{attorney.admitted}</dd>
                 </div>
                 <div className="flex gap-3">
-                  <dt className="w-24 shrink-0 tracking-[0.12em] text-zinc-400 uppercase">
+                  <dt className="w-24 shrink-0 tracking-[0.12em] text-faint uppercase">
                     Direct
                   </dt>
                   <dd className="min-w-0">
                     <a
                       href={`mailto:${attorney.email}`}
-                      className="text-zinc-800 underline underline-offset-4 hover:no-underline"
+                      className="text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
                     >
                       {attorney.email}
                     </a>
@@ -159,12 +159,12 @@ export default function AttorneysPage() {
         })}
       </ul>
 
-      <p className="mt-10 text-sm text-zinc-500">
+      <p className="mt-10 text-sm text-faint">
         Recruiting at partner level only. Vacancies are circulated to existing
         clients first; write to{" "}
         <a
           href={`mailto:${FIRM.email}`}
-          className="underline underline-offset-4 hover:no-underline"
+          className="text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
         >
           {FIRM.email}
         </a>{" "}

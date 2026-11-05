@@ -31,25 +31,26 @@ export default function Hero() {
       variants={container}
       initial="hidden"
       animate="visible"
-      className="flex min-h-[calc(100svh_-_3rem)] w-full items-center bg-white pt-10 pb-14 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24"
+      className="flex min-h-[calc(100svh_-_3rem)] w-full items-center bg-paper pt-10 pb-14 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24"
     >
       <div className="grid w-full grid-cols-1 items-center gap-y-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-x-10 lg:gap-y-0">
         <div className="min-w-0 max-w-[52ch]">
           <motion.p
             variants={item}
             transition={transition}
-            className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-900 sm:text-[11px]"
+            className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-soft sm:text-[11px]"
           >
+            <span aria-hidden className="h-px w-8 shrink-0 bg-accent" />
             Institutional Counsel
           </motion.p>
 
           <motion.h1
             variants={item}
             transition={transition}
-            className="mt-5 font-serif text-[2.35rem] leading-[1.08] font-bold tracking-[-0.022em] text-balance text-black sm:text-[2.9rem] lg:text-[3.35rem] 2xl:text-[3.75rem]"
+            className="mt-5 font-serif text-[2.35rem] leading-[1.08] font-bold tracking-[-0.022em] text-balance text-ink sm:text-[2.9rem] lg:text-[3.35rem] 2xl:text-[3.75rem]"
           >
             Precision in Counsel.
-            <span className="block font-normal italic text-zinc-600">
+            <span className="block font-normal italic text-muted">
               Authority in Advocacy.
             </span>
           </motion.h1>
@@ -57,7 +58,7 @@ export default function Hero() {
           <motion.p
             variants={item}
             transition={transition}
-            className="mt-6 max-w-[46ch] text-[0.95rem] leading-relaxed text-pretty text-zinc-600 sm:text-base lg:text-[1.05rem]"
+            className="mt-6 max-w-[46ch] text-[0.95rem] leading-relaxed text-pretty text-muted sm:text-base lg:text-[1.05rem]"
           >
             Institutional counsel and decisive advocacy in high-stakes disputes,
             sovereign transactions, and international governance.
@@ -66,13 +67,13 @@ export default function Hero() {
           <motion.div variants={item} transition={transition} className="mt-9">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 rounded-xl bg-black px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-zinc-800 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 sm:text-base"
+              className="group inline-flex items-center gap-3 rounded-xl bg-accent px-7 py-3.5 text-sm font-medium text-on-ink transition-colors hover:bg-accent-deep active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:text-base"
             >
               <span className="tracking-wide">Schedule Consultation</span>
               <HugeiconsIcon
                 icon={ArrowRight01Icon}
                 size={16}
-                color="#ffffff"
+                color="var(--on-ink)"
                 strokeWidth={2}
                 className="transition-transform duration-200 group-hover:translate-x-1"
               />
@@ -82,10 +83,10 @@ export default function Hero() {
           <motion.p
             variants={item}
             transition={transition}
-            className="mt-10 text-[10px] leading-relaxed uppercase tracking-[0.16em] text-zinc-500 sm:text-[11px]"
+            className="mt-10 text-[10px] leading-relaxed uppercase tracking-[0.16em] text-faint sm:text-[11px]"
           >
             Band 1 &middot; Chambers Global
-            <span className="mx-2 text-zinc-300">|</span>
+            <span className="mx-2 text-whisper">|</span>
             London &middot; New York &middot; Geneva &middot; Singapore
           </motion.p>
         </div>
@@ -97,7 +98,7 @@ export default function Hero() {
           transition={transition}
           className="min-w-0 -mr-4 sm:-mr-6 lg:-mr-8"
         >
-          <div className="relative aspect-4/3 overflow-hidden rounded-l-2xl bg-zinc-950 sm:aspect-16/10 lg:aspect-3/2 lg:rounded-l-3xl">
+          <div className="relative aspect-4/3 overflow-hidden rounded-l-2xl bg-ink sm:aspect-16/10 lg:aspect-3/2 lg:rounded-l-3xl">
             <Image
               src="/hero-building.jpeg"
               alt="Crestview Chambers — brutalist concrete chambers building"

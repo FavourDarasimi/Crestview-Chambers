@@ -45,20 +45,20 @@ export default function ContactPage() {
         <section aria-labelledby="channels">
           <h2
             id="channels"
-            className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-900 sm:text-[11px]"
+            className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]"
           >
             How to reach us
           </h2>
 
-          <dl className="mt-6 divide-y divide-zinc-200 border-y border-zinc-200">
+          <dl className="mt-6 divide-y divide-rule border-y border-rule">
             <div className="py-5">
-              <dt className="text-xs tracking-[0.12em] text-zinc-500 uppercase">
+              <dt className="text-xs tracking-[0.12em] text-faint uppercase">
                 General counsel
               </dt>
               <dd className="mt-2">
                 <a
                   href={`mailto:${FIRM.email}`}
-                  className="font-serif text-lg text-black underline underline-offset-4 hover:no-underline sm:text-xl"
+                  className="font-serif text-lg text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline sm:text-xl"
                 >
                   {FIRM.email}
                 </a>
@@ -66,13 +66,13 @@ export default function ContactPage() {
             </div>
 
             <div className="py-5">
-              <dt className="text-xs tracking-[0.12em] text-zinc-500 uppercase">
+              <dt className="text-xs tracking-[0.12em] text-faint uppercase">
                 Enforcement, raids or designation — 24 hours
               </dt>
               <dd className="mt-2">
                 <a
                   href={`mailto:${FIRM.emergencyEmail}`}
-                  className="font-serif text-lg text-black underline underline-offset-4 hover:no-underline sm:text-xl"
+                  className="font-serif text-lg text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline sm:text-xl"
                 >
                   {FIRM.emergencyEmail}
                 </a>
@@ -80,13 +80,13 @@ export default function ContactPage() {
             </div>
 
             <div className="py-5">
-              <dt className="text-xs tracking-[0.12em] text-zinc-500 uppercase">
+              <dt className="text-xs tracking-[0.12em] text-faint uppercase">
                 London switchboard
               </dt>
               <dd className="mt-2">
                 <a
                   href={toHref(FIRM.switchboard)}
-                  className="font-mono text-lg text-black underline underline-offset-4 hover:no-underline"
+                  className="font-mono text-lg text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
                 >
                   {FIRM.switchboard}
                 </a>
@@ -94,13 +94,13 @@ export default function ContactPage() {
             </div>
           </dl>
 
-          <p className="mt-6 max-w-[54ch] text-sm leading-relaxed text-pretty text-zinc-600">
+          <p className="mt-6 max-w-[54ch] text-sm leading-relaxed text-pretty text-muted">
             Please do not send privileged or confidential material before an
             engagement letter is in place. Email is not a confidential channel
             as a matter of law;{" "}
             <Link
               href="/portal"
-              className="text-black underline underline-offset-4 hover:no-underline"
+              className="text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
             >
               the client portal
             </Link>{" "}
@@ -111,21 +111,21 @@ export default function ContactPage() {
         <section aria-labelledby="process">
           <h2
             id="process"
-            className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-900 sm:text-[11px]"
+            className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]"
           >
             What happens next
           </h2>
           <ol className="mt-6 space-y-6">
             {STEPS.map((step, index) => (
               <li key={step.label} className="grid gap-2 sm:grid-cols-[auto_1fr] sm:gap-5">
-                <span className="font-mono text-xs text-zinc-400">
+                <span className="font-mono text-xs text-faint">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="text-sm font-semibold text-black">
+                  <h3 className="text-sm font-semibold text-ink">
                     {step.label}
                   </h3>
-                  <p className="mt-1.5 max-w-[46ch] text-sm leading-relaxed text-pretty text-zinc-600">
+                  <p className="mt-1.5 max-w-[46ch] text-sm leading-relaxed text-pretty text-muted">
                     {step.body}
                   </p>
                 </div>
@@ -135,10 +135,10 @@ export default function ContactPage() {
         </section>
       </div>
 
-      <section aria-labelledby="which-discipline" className="mt-16 border-t border-zinc-200 pt-10">
+      <section aria-labelledby="which-discipline" className="mt-16 border-t border-rule pt-10">
         <h2
           id="which-discipline"
-          className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-900 sm:text-[11px]"
+          className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]"
         >
           Which discipline you probably need
         </h2>
@@ -147,7 +147,7 @@ export default function ContactPage() {
             <li key={area.slug}>
               <Link
                 href={`/practice/${area.slug}`}
-                className="text-sm text-black underline underline-offset-4 hover:no-underline"
+                className="text-sm text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
               >
                 {area.title}
               </Link>
@@ -155,17 +155,17 @@ export default function ContactPage() {
           ))}
         </ul>
 
-        <h2 className="mt-12 text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-900 sm:text-[11px]">
+        <h2 className="mt-12 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]">
           Offices
         </h2>
-        <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-2 text-sm text-zinc-600">
+        <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted">
           {OFFICES.map((office) => (
             <li key={office.city}>
               {office.city}
-              <span className="mx-2 text-zinc-300">•</span>
+              <span className="mx-2 text-whisper">•</span>
               <a
                 href={toHref(office.phone)}
-                className="font-mono text-xs text-zinc-700 underline underline-offset-4 hover:no-underline"
+                className="font-mono text-xs text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
               >
                 {office.phone}
               </a>

@@ -1,13 +1,67 @@
 @import "tailwindcss";
 
+/* Black on warm paper, oxblood as the only colour.
+ *
+ * Text carries no hue at all: every step is black, taken down by alpha rather
+ * than by a tinted grey, so the paper shows through the type and keeps it warm
+ * instead of blue-grey. Ratios are measured off the rendered page, on paper:
+ *   ink 18.96:1, ink-soft 15.19:1, body 11.81:1, muted 6.98:1, faint 4.81:1
+ *   accent 8.32-9.26:1, on-ink 19.82:1  |  on accent-tint: muted 6.68:1
+ * Two pairs are forbidden by measurement, so do not "improve" them back in:
+ *   accent on ink is 2.05:1 and ink on accent the same — an accent or ink
+ *   surface always carries on-ink text.
+ * whisper (3.19:1) and rule* are for separators and hairlines only, never copy.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
+  --paper: #f6f3ed;
+  --surface: #efeae1;
+  --surface-2: #e5dfd4;
+  --rule-soft: #e9e3d9;
+  --rule: #dfd8cc;
+  --rule-firm: #cfc5b4;
+
+  --ink: #000000;
+  --ink-soft: rgb(0 0 0 / 0.88);
+  --ink-raised: #1f1f1f;
+  --on-ink: #fbf8f3;
+
+  --body: rgb(0 0 0 / 0.80);
+  --muted: rgb(0 0 0 / 0.66);
+  --faint: rgb(0 0 0 / 0.56);
+  --whisper: rgb(0 0 0 / 0.44);
+
+  --accent: #7a2019;
+  --accent-deep: #5c1512;
+  --accent-tint: #f1e5e1;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-rule-soft: var(--rule-soft);
+  --color-rule: var(--rule);
+  --color-rule-firm: var(--rule-firm);
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-raised: var(--ink-raised);
+  --color-on-ink: var(--on-ink);
+
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-whisper: var(--whisper);
+
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-tint: var(--accent-tint);
+
+  /* Warm-tinted rather than rgb(0,0,0): a neutral shadow over paper reads grey. */
+  --shadow-card: 0 1px 2px 0 rgb(25 21 18 / 0.06);
+  --shadow-nav: 0 4px 24px -4px rgb(25 21 18 / 0.1);
+  --shadow-menu: 0 20px 60px -15px rgb(25 21 18 / 0.16);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
@@ -19,26 +73,26 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar in monochrome */
+/* Custom scrollbar in the warm neutral scale */
 ::-webkit-scrollbar {
   width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: var(--paper);
 }
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
+  background: var(--rule-firm);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #71717a;
+  background: var(--accent);
 }
 
 /* Law-themed button hover micro-animations */

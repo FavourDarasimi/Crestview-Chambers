@@ -20,16 +20,16 @@ export default function PracticeIndexPage() {
         lede="We practise where the questions are jurisdictional and the exposure is quantifiable. Each discipline below is led by senior partners who remain on the file throughout."
       />
 
-      <div className="grid gap-px border border-zinc-200 bg-zinc-200 sm:grid-cols-2">
+      <div className="grid gap-px border border-rule bg-rule sm:grid-cols-2">
         {PRACTICE_AREAS.map((area, index) => (
           <Link
             key={area.slug}
             href={`/practice/${area.slug}`}
-            className="group flex flex-col justify-between gap-8 bg-white p-6 transition-colors hover:bg-zinc-50 sm:p-8"
+            className="group flex flex-col justify-between gap-8 bg-paper p-6 transition-colors hover:bg-surface sm:p-8"
           >
             <div>
               <div className="flex items-start justify-between gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-black transition-colors group-hover:bg-black group-hover:text-white">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-ink transition-colors group-hover:bg-ink group-hover:text-on-ink">
                   <HugeiconsIcon
                     icon={area.icon}
                     size={19}
@@ -37,21 +37,24 @@ export default function PracticeIndexPage() {
                     strokeWidth={1.8}
                   />
                 </div>
-                <span className="text-[10px] tracking-[0.16em] text-zinc-400 uppercase">
-                  {String(index + 1).padStart(2, "0")}
+                <span className="flex flex-col items-end gap-2.5">
+                  <span className="text-[10px] tracking-[0.16em] text-faint uppercase">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span aria-hidden className="h-px w-6 bg-accent" />
                 </span>
               </div>
 
-              <h2 className="mt-6 font-serif text-xl leading-snug font-semibold text-balance text-black sm:text-2xl">
+              <h2 className="mt-6 font-serif text-xl leading-snug font-semibold text-balance text-ink sm:text-2xl">
                 {area.title}
               </h2>
-              <p className="mt-3 max-w-[42ch] text-sm leading-relaxed text-pretty text-zinc-600">
+              <p className="mt-3 max-w-[42ch] text-sm leading-relaxed text-pretty text-muted">
                 {area.blurb}
               </p>
             </div>
 
-            <span className="inline-flex items-center gap-2 text-xs font-semibold text-black">
-              <span className="border-b border-transparent pb-px transition-colors group-hover:border-black">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-accent">
+              <span className="border-b border-transparent pb-px transition-colors group-hover:border-accent group-hover:text-accent-deep">
                 View discipline
               </span>
               <HugeiconsIcon
@@ -66,11 +69,11 @@ export default function PracticeIndexPage() {
         ))}
       </div>
 
-      <p className="mt-10 text-sm text-zinc-500">
+      <p className="mt-10 text-sm text-faint">
         Not sure which discipline your matter falls under?{" "}
         <Link
           href="/contact"
-          className="font-medium text-black underline underline-offset-4 hover:no-underline"
+          className="font-medium text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
         >
           Speak to the intake team
         </Link>

@@ -10,8 +10,9 @@ const LEGAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-zinc-200 bg-white">
+    <footer className="mt-24 border-t border-rule bg-paper">
       <div className="mx-auto w-full max-w-[1500px] px-4 sm:px-6 lg:px-8">
+        <span aria-hidden className="-mt-px block h-px w-20 bg-accent" />
         <div className="grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] lg:gap-10 lg:py-16">
           <div className="max-w-[38ch]">
           <Link
@@ -19,31 +20,31 @@ export default function Footer() {
             className="flex w-fit items-center gap-3"
             aria-label="Crestview Chambers home"
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-black">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-ink">
               <HugeiconsIcon
                 icon={JusticeScale01Icon}
                 size={20}
-                color="#ffffff"
+                color="var(--on-ink)"
                 strokeWidth={1.8}
               />
             </span>
             <span className="flex flex-col">
-              <span className="font-serif text-lg leading-none font-bold tracking-[0.16em] text-black">
+              <span className="font-serif text-lg leading-none font-bold tracking-[0.16em] text-ink">
                 CRESTVIEW
               </span>
-              <span className="mt-1 text-[9px] leading-none font-semibold tracking-[0.24em] text-zinc-500 uppercase">
+              <span className="mt-1 text-[9px] leading-none font-semibold tracking-[0.24em] text-faint uppercase">
                 CHAMBERS
               </span>
             </span>
           </Link>
-          <p className="mt-5 text-sm leading-relaxed text-pretty text-zinc-600">
+          <p className="mt-5 text-sm leading-relaxed text-pretty text-muted">
             Institutional counsel and advocacy in cross-border transactions,
             high-stakes disputes and the regulation that sits between them.
           </p>
         </div>
 
         <nav aria-label="Practice areas">
-          <h2 className="text-[10px] font-semibold tracking-[0.16em] text-zinc-900 uppercase sm:text-[11px]">
+          <h2 className="text-[10px] font-semibold tracking-[0.16em] text-ink-soft uppercase sm:text-[11px]">
             Practice
           </h2>
           <ul className="mt-5 space-y-2.5">
@@ -51,7 +52,7 @@ export default function Footer() {
               <li key={area.slug}>
                 <Link
                   href={`/practice/${area.slug}`}
-                  className="text-sm text-zinc-600 transition-colors hover:text-black"
+                  className="text-sm text-muted transition-colors hover:text-ink"
                 >
                   {area.title.replace(/ &.*/, "")}
                 </Link>
@@ -62,7 +63,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/practice"
-                className="text-sm text-black underline underline-offset-4 hover:no-underline"
+                className="text-sm text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
               >
                 All practice areas
               </Link>
@@ -71,7 +72,7 @@ export default function Footer() {
         </nav>
 
         <nav aria-label="Chambers">
-          <h2 className="text-[10px] font-semibold tracking-[0.16em] text-zinc-900 uppercase sm:text-[11px]">
+          <h2 className="text-[10px] font-semibold tracking-[0.16em] text-ink-soft uppercase sm:text-[11px]">
             Chambers
           </h2>
           <ul className="mt-5 space-y-2.5">
@@ -79,7 +80,7 @@ export default function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-zinc-600 transition-colors hover:text-black"
+                  className="text-sm text-muted transition-colors hover:text-ink"
                 >
                   {link.label}
                 </Link>
@@ -88,7 +89,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/portal"
-                className="text-sm text-zinc-600 transition-colors hover:text-black"
+                className="text-sm text-muted transition-colors hover:text-ink"
               >
                 Client Portal
               </Link>
@@ -97,33 +98,33 @@ export default function Footer() {
         </nav>
 
         <div>
-          <h2 className="text-[10px] font-semibold tracking-[0.16em] text-zinc-900 uppercase sm:text-[11px]">
+          <h2 className="text-[10px] font-semibold tracking-[0.16em] text-ink-soft uppercase sm:text-[11px]">
             Offices
           </h2>
           <ul className="mt-5 space-y-2.5">
             {OFFICES.map((office) => (
-              <li key={office.city} className="text-sm text-zinc-600">
+              <li key={office.city} className="text-sm text-muted">
                 {office.city}
               </li>
             ))}
           </ul>
           <a
             href={`mailto:${FIRM.email}`}
-            className="mt-5 block text-sm text-black underline underline-offset-4 hover:no-underline"
+            className="mt-5 block text-sm text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
           >
             {FIRM.email}
           </a>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 border-t border-zinc-200 py-7 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex flex-col gap-4 border-t border-rule py-7 sm:flex-row sm:items-start sm:justify-between">
         <div className="max-w-[70ch] space-y-2">
-          <p className="text-xs leading-relaxed text-zinc-500">
+          <p className="text-xs leading-relaxed text-faint">
             &copy; {new Date().getFullYear()} {FIRM.name}. Authorised and
             regulated as a solicitor practice in England and Wales; US work is
             undertaken through separately licensed entities.
           </p>
-          <p className="text-xs leading-relaxed text-zinc-400">
+          <p className="text-xs leading-relaxed text-faint">
             This site is a design demonstration. Firm identity, attorneys,
             offices and contact details are fictional and no instructions can
             be taken.
@@ -134,7 +135,7 @@ export default function Footer() {
             <li key={link.label}>
               <Link
                 href={link.href}
-                className="text-xs text-zinc-500 underline underline-offset-4 hover:text-black hover:no-underline"
+                className="text-xs text-faint underline underline-offset-4 hover:text-accent hover:text-accent-deep hover:no-underline"
               >
                 {link.label}
               </Link>

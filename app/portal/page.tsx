@@ -37,22 +37,22 @@ export default function PortalPage() {
         <section aria-labelledby="how-access-works">
           <h2
             id="how-access-works"
-            className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-900 sm:text-[11px]"
+            className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]"
           >
             How access works
           </h2>
           <div className="mt-6 space-y-8">
             {RULES.map((rule, index) => (
-              <div key={rule.title} className="border-t border-zinc-200 pt-6">
+              <div key={rule.title} className="border-t border-rule pt-6">
                 <div className="flex items-baseline gap-4">
-                  <span className="font-mono text-xs text-zinc-400">
+                  <span className="font-mono text-xs text-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="text-base font-semibold text-black">
+                  <h3 className="text-base font-semibold text-ink">
                     {rule.title}
                   </h3>
                 </div>
-                <p className="mt-2 max-w-[62ch] text-sm leading-relaxed text-pretty text-zinc-600">
+                <p className="mt-2 max-w-[62ch] text-sm leading-relaxed text-pretty text-muted">
                   {rule.body}
                 </p>
               </div>
@@ -61,15 +61,15 @@ export default function PortalPage() {
         </section>
 
         <aside className="space-y-8">
-          <div className="border border-zinc-200 bg-zinc-50 p-6">
-            <h2 className="font-serif text-lg font-semibold text-black">
+          <div className="border border-accent/25 bg-accent-tint p-6">
+            <h2 className="font-serif text-lg font-semibold text-ink">
               Existing clients
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+            <p className="mt-3 text-sm leading-relaxed text-muted">
               Write to the partner holding your file, copying{" "}
               <a
                 href={`mailto:${FIRM.email}?subject=Portal%20access`}
-                className="text-black underline underline-offset-4 hover:no-underline"
+                className="text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
               >
                 {FIRM.email}
               </a>
@@ -77,17 +77,17 @@ export default function PortalPage() {
             </p>
           </div>
 
-          <div className="border border-zinc-200 p-6">
-            <h2 className="font-serif text-lg font-semibold text-black">
+          <div className="border border-rule p-6">
+            <h2 className="font-serif text-lg font-semibold text-ink">
               Lost your device or access
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+            <p className="mt-3 text-sm leading-relaxed text-muted">
               Report it the same day. We revoke the session and re-issue out of
               band; we will never confirm a new device by email alone.
             </p>
             <a
               href={`tel:${FIRM.switchboard.replace(/[^+\d]/g, "")}`}
-              className="mt-4 inline-block font-mono text-sm text-black underline underline-offset-4 hover:no-underline"
+              className="mt-4 inline-block font-mono text-sm text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
             >
               {FIRM.switchboard}
             </a>
@@ -95,16 +95,16 @@ export default function PortalPage() {
         </aside>
       </div>
 
-      <section className="mt-16 border-t border-zinc-200 pt-10">
-        <h2 className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-900 sm:text-[11px]">
+      <section className="mt-16 border-t border-rule pt-10">
+        <h2 className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]">
           Not yet instructed?
         </h2>
-        <p className="mt-4 max-w-[64ch] text-sm leading-relaxed text-pretty text-zinc-600">
+        <p className="mt-4 max-w-[64ch] text-sm leading-relaxed text-pretty text-muted">
           The portal holds privileged material for live matters. If we are not
           acting for you, there is nothing here to reach — begin at the{" "}
           <Link
             href="/contact"
-            className="text-black underline underline-offset-4 hover:no-underline"
+            className="text-accent underline underline-offset-4 hover:text-accent-deep hover:no-underline"
           >
             consultation page
           </Link>{" "}
