@@ -1,38 +1,44 @@
 @import "tailwindcss";
 
-/* Black on warm paper, oxblood as the only colour.
+/* Cream on warm charcoal, ember as the only colour.
  *
- * Text carries no hue at all: every step is black, taken down by alpha rather
- * than by a tinted grey, so the paper shows through the type and keeps it warm
- * instead of blue-grey. Ratios are measured off the rendered page, on paper:
- *   ink 18.96:1, ink-soft 15.19:1, body 11.81:1, muted 6.98:1, faint 4.81:1
- *   accent 8.32-9.26:1, on-ink 19.82:1  |  on accent-tint: muted 6.68:1
- * Two pairs are forbidden by measurement, so do not "improve" them back in:
- *   accent on ink is 2.05:1 and ink on accent the same — an accent or ink
- *   surface always carries on-ink text.
- * whisper (3.19:1) and rule* are for separators and hairlines only, never copy.
+ * The dark inversion of the paper scheme. Type carries no hue: ink is a warm
+ * cream and every step below it is that cream at alpha, so hierarchy comes
+ * from weight rather than tint, exactly as the light scheme did.
+ * Oxblood cannot survive here — #7a2019 on #141210 is 1.82:1 — so the accent
+ * lifts to ember, bright enough to read as text and as a surface at one value.
+ * Ratios measured off the rendered page, worst background for each step:
+ *   ink 15.23:1, ink-soft 13.03:1, body 10.88:1, muted 7.27:1, faint 5.83:1
+ *   accent 4.81:1 on accent-tint, 5.28:1 under on-ink on an accent surface
+ * One pair stays forbidden: ember on an ink surface is 3.16:1, so an accent or
+ * ink surface always carries on-ink, never accent.
+ * whisper (4.05:1) and rule* are for separators and hairlines only, never copy.
  */
 :root {
-  --paper: #f6f3ed;
-  --surface: #efeae1;
-  --surface-2: #e5dfd4;
-  --rule-soft: #e9e3d9;
-  --rule: #dfd8cc;
-  --rule-firm: #cfc5b4;
+  --paper: #141210;
+  --surface: #1d1a17;
+  --surface-2: #26221e;
+  --rule-soft: #241f1b;
+  --rule: #322c26;
+  --rule-firm: #4a423a;
 
-  --ink: #000000;
-  --ink-soft: rgb(0 0 0 / 0.88);
-  --ink-raised: #1f1f1f;
-  --on-ink: #fbf8f3;
+  --ink: #f5f2ec;
+  --ink-soft: rgb(245 242 236 / 0.88);
+  --ink-raised: #e3ded4;
+  --ink-deep: #0b0a09;
+  --on-ink: #141210;
 
-  --body: rgb(0 0 0 / 0.80);
-  --muted: rgb(0 0 0 / 0.66);
-  --faint: rgb(0 0 0 / 0.56);
-  --whisper: rgb(0 0 0 / 0.44);
+  --body: rgb(245 242 236 / 0.80);
+  --muted: rgb(245 242 236 / 0.66);
+  --faint: rgb(245 242 236 / 0.56);
+  --whisper: rgb(245 242 236 / 0.44);
 
-  --accent: #7a2019;
-  --accent-deep: #5c1512;
-  --accent-tint: #f1e5e1;
+  --accent: #c8705f;
+  --accent-deep: #d5806f;
+  --accent-tint: #241a16;
+
+  /* Stays a dark haze in either scheme: a scrim must recede, not glow. */
+  --scrim: rgb(8 7 6 / 0.66);
 }
 
 @theme inline {
@@ -46,6 +52,7 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-raised: var(--ink-raised);
+  --color-ink-deep: var(--ink-deep);
   --color-on-ink: var(--on-ink);
 
   --color-body: var(--body);
@@ -56,11 +63,12 @@
   --color-accent: var(--accent);
   --color-accent-deep: var(--accent-deep);
   --color-accent-tint: var(--accent-tint);
+  --color-scrim: var(--scrim);
 
-  /* Warm-tinted rather than rgb(0,0,0): a neutral shadow over paper reads grey. */
-  --shadow-card: 0 1px 2px 0 rgb(25 21 18 / 0.06);
-  --shadow-nav: 0 4px 24px -4px rgb(25 21 18 / 0.1);
-  --shadow-menu: 0 20px 60px -15px rgb(25 21 18 / 0.16);
+  /* Over a dark ground a shadow has to be black and heavy to read at all. */
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.45);
+  --shadow-nav: 0 4px 24px -4px rgb(0 0 0 / 0.6);
+  --shadow-menu: 0 20px 60px -15px rgb(0 0 0 / 0.72);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -69,7 +77,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {

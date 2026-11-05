@@ -285,7 +285,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 z-40 bg-ink/40 backdrop-blur-xs xl:hidden"
+              className="fixed inset-0 z-40 bg-scrim backdrop-blur-xs xl:hidden"
               aria-hidden="true"
             />
 

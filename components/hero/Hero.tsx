@@ -98,7 +98,7 @@ export default function Hero() {
           transition={transition}
           className="min-w-0 -mr-4 sm:-mr-6 lg:-mr-8"
         >
-          <div className="relative aspect-4/3 overflow-hidden rounded-l-2xl bg-ink sm:aspect-16/10 lg:aspect-3/2 lg:rounded-l-3xl">
+          <div className="relative aspect-4/3 overflow-hidden rounded-l-2xl bg-ink-deep sm:aspect-16/10 lg:aspect-3/2 lg:rounded-l-3xl">
             <Image
               src="/hero-building.jpeg"
               alt="Crestview Chambers — brutalist concrete chambers building"
