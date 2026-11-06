@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/page/PageHeader";
+import ConsultationForm from "@/components/contact/ConsultationForm";
 import { FIRM, OFFICES, PRACTICE_AREAS, telHref } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -34,17 +35,19 @@ export default function ContactPage() {
     <>
       <PageHeader
         kicker="Book a Consultation"
-        title="Speak to a partner, not an intake form."
-        lede="We have deliberately not built a web form. Anything complex enough to need us is too complex to be triaged by a dropdown, and the first conversation is usually where the framing gets corrected."
+        title="Say what happened, in your own words."
+        lede="This page composes the enquiry rather than collecting it. Answer what you can, and the note is written out below in the form a partner actually reads — then handed to your own mail client. Nothing is transmitted from this page and nothing is stored on it."
       />
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
+        <ConsultationForm />
+
         <section aria-labelledby="channels">
           <h2
             id="channels"
             className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]"
           >
-            How to reach us
+            Or reach us directly
           </h2>
 
           <dl className="mt-6 divide-y divide-rule border-y border-rule">
@@ -104,33 +107,33 @@ export default function ContactPage() {
             is the only one we treat that way.
           </p>
         </section>
-
-        <section aria-labelledby="process">
-          <h2
-            id="process"
-            className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]"
-          >
-            What happens next
-          </h2>
-          <ol className="mt-6 space-y-6">
-            {STEPS.map((step, index) => (
-              <li key={step.label} className="grid gap-2 sm:grid-cols-[auto_1fr] sm:gap-5">
-                <span className="font-mono text-xs text-faint">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-ink">
-                    {step.label}
-                  </h3>
-                  <p className="mt-1.5 max-w-[46ch] text-sm leading-relaxed text-pretty text-muted">
-                    {step.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
       </div>
+
+      <section aria-labelledby="process" className="mt-16 border-t border-rule pt-10">
+        <h2
+          id="process"
+          className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft sm:text-[11px]"
+        >
+          What happens next
+        </h2>
+        <ol className="mt-6 grid gap-x-12 gap-y-8 sm:grid-cols-2">
+          {STEPS.map((step, index) => (
+            <li key={step.label} className="grid gap-2 sm:grid-cols-[auto_1fr] sm:gap-5">
+              <span className="font-mono text-xs text-faint">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3 className="text-sm font-semibold text-ink">
+                  {step.label}
+                </h3>
+                <p className="mt-1.5 max-w-[46ch] text-sm leading-relaxed text-pretty text-muted">
+                  {step.body}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       <section aria-labelledby="which-discipline" className="mt-16 border-t border-rule pt-10">
         <h2
