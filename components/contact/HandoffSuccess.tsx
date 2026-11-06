@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   motion,
   useReducedMotion,
   type Variants,
 } from "framer-motion";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowRight01Icon, Copy01Icon } from "@hugeicons/core-free-icons";
-import { FIRM } from "@/lib/site";
-import type { Draft } from "./consultationFields";
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 
 const container: Variants = {
   hidden: {},
@@ -23,12 +21,10 @@ const item: Variants = {
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-export default function DraftSuccess({
-  draft,
+export default function HandoffSuccess({
   href,
   onEdit,
 }: {
-  draft: Draft;
   href: string;
   onEdit: () => void;
 }) {
@@ -37,7 +33,6 @@ export default function DraftSuccess({
     ? { duration: 0 }
     : { duration: 0.55, ease: EASE };
 
-  const [copied, setCopied] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const root = useRef<HTMLDivElement>(null);
 
@@ -52,18 +47,6 @@ export default function DraftSuccess({
     });
     heading.current?.focus({ preventScroll: true });
   }, [reduceMotion]);
-
-  async function copy() {
-    try {
-      await navigator.clipboard.writeText(draft.body);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2400);
-    } catch {
-      // Clipboard is blocked without focus or permission; the mailto handoff
-      // below still works, so there is nothing to recover from here.
-      setCopied(false);
-    }
-  }
 
   return (
     <motion.div
@@ -103,23 +86,14 @@ export default function DraftSuccess({
           />
         </svg>
 
-        <div>
-          <h2
-            ref={heading}
-            tabIndex={-1}
-            data-testid="success-heading"
-            className="font-serif text-[1.7rem] leading-[1.12] font-bold tracking-[-0.02em] text-balance text-ink focus-visible:outline-none sm:text-[2rem]"
-          >
-            Drafted, not sent.
-          </h2>
-          <motion.p
-            variants={item}
-            transition={t}
-            className="mt-2 text-[11px] tracking-[0.14em] text-faint uppercase"
-          >
-            Addressed to {FIRM.email}
-          </motion.p>
-        </div>
+        <h2
+          ref={heading}
+          tabIndex={-1}
+          data-testid="success-heading"
+          className="font-serif text-[1.7rem] leading-[1.12] font-bold tracking-[-0.02em] text-balance text-ink focus-visible:outline-none sm:text-[2rem]"
+        >
+          Opening your mail client.
+        </h2>
       </div>
 
       <motion.p
@@ -127,29 +101,10 @@ export default function DraftSuccess({
         transition={t}
         className="max-w-[52ch] text-sm leading-relaxed text-pretty text-body sm:text-base"
       >
-        Nothing has left this page. The note below is already written — open it
-        in your mail client and it goes out as an ordinary message, which you
-        can still edit before it does.
+        Send it there and a partner reads every enquiry within one business
+        day. Nothing is held on this page — if no window appeared, the button
+        below opens the note again.
       </motion.p>
-
-      <motion.div
-        variants={item}
-        transition={t}
-        className="border border-rule bg-paper p-5 sm:p-6"
-      >
-        <p className="text-[10px] tracking-[0.14em] text-faint uppercase">
-          Subject
-        </p>
-        <p className="mt-1.5 font-serif text-base text-ink">{draft.subject}</p>
-        <div className="mt-5 border-t border-rule pt-5">
-          <p className="text-[10px] tracking-[0.14em] text-faint uppercase">
-            Body
-          </p>
-          <pre className="mt-2 max-h-64 overflow-auto text-[0.8rem] leading-relaxed whitespace-pre-wrap text-muted font-sans">
-            {draft.body}
-          </pre>
-        </div>
-      </motion.div>
 
       <motion.div
         variants={item}
@@ -160,7 +115,7 @@ export default function DraftSuccess({
           href={href}
           className="group inline-flex items-center gap-3 rounded-xl bg-accent px-6 py-3 text-sm font-medium text-on-ink transition-colors hover:bg-accent-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink-deep"
         >
-          Open in mail client
+          Open it again
           <HugeiconsIcon
             icon={ArrowRight01Icon}
             size={15}
@@ -169,20 +124,6 @@ export default function DraftSuccess({
             className="transition-transform duration-200 group-hover:translate-x-1"
           />
         </a>
-
-        <button
-          type="button"
-          onClick={copy}
-          className="inline-flex items-center gap-2 rounded-xl border border-rule-firm px-5 py-2.5 text-sm text-ink-soft transition-colors hover:border-accent hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink-deep"
-        >
-          <HugeiconsIcon
-            icon={Copy01Icon}
-            size={15}
-            color="currentColor"
-            strokeWidth={1.8}
-          />
-          {copied ? "Copied" : "Copy the note"}
-        </button>
 
         <button
           type="button"

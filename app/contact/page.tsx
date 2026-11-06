@@ -36,10 +36,10 @@ export default function ContactPage() {
       <PageHeader
         kicker="Book a Consultation"
         title="Say what happened, in your own words."
-        lede="This page composes the enquiry rather than collecting it. Answer what you can, and the note is written out below in the form a partner actually reads — then handed to your own mail client. Nothing is transmitted from this page and nothing is stored on it."
+        lede="Answer what you can, then press send. The enquiry is written out in the form a partner actually reads and opened in your own mail client, so it leaves as an ordinary message you can still edit. Nothing is collected, transmitted or stored by this page."
       />
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
         <ConsultationForm />
 
         <section aria-labelledby="channels">

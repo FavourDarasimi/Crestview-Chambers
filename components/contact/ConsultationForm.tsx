@@ -11,7 +11,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { PRACTICE_AREAS } from "@/lib/site";
-import DraftSuccess from "./DraftSuccess";
+import HandoffSuccess from "./HandoffSuccess";
 import {
   EMPTY,
   MESSAGE_MAX,
@@ -104,12 +104,14 @@ export default function ConsultationForm() {
     if (draft || !editedAfterSend.current) return;
     editedAfterSend.current = false;
     // AnimatePresence mounts this subtree only after the success panel has
-    // finished exiting, so the field does not exist yet at this point.
-    const deadline = performance.now() + 1200;
+    // finished exiting, so the field does not exist yet at this point. Timers
+    // rather than animation frames because the mailto handoff can leave the
+    // page backgrounded, and a backgrounded page stops painting frames.
+    const deadline = performance.now() + 1500;
     const attempt = () => {
       const el = document.getElementById("name");
       if (el) el.focus({ preventScroll: true });
-      else if (performance.now() < deadline) requestAnimationFrame(attempt);
+      else if (performance.now() < deadline) setTimeout(attempt, 50);
     };
     attempt();
   }, [draft]);
@@ -131,7 +133,15 @@ export default function ConsultationForm() {
       document.getElementById(first)?.focus();
       return;
     }
-    setDraft(compose(values));
+    const composed = compose(values);
+    try {
+      // A frame without top-level navigation rights throws here; the modal
+      // carries the same link, so the handoff is never the only way out.
+      window.location.href = mailtoHref(composed);
+    } catch {
+      // Ignored on purpose — the modal below is the recovery path.
+    }
+    setDraft(composed);
   }
 
   const errorCount = ORDER.filter((key) => errors[key]).length;
@@ -158,8 +168,7 @@ export default function ConsultationForm() {
             exit={{ opacity: 0 }}
             transition={t}
           >
-            <DraftSuccess
-              draft={draft}
+            <HandoffSuccess
               href={mailtoHref(draft)}
               onEdit={() => {
                 editedAfterSend.current = true;
@@ -440,7 +449,7 @@ export default function ConsultationForm() {
                 type="submit"
                 className="group inline-flex items-center gap-3 rounded-xl bg-accent px-6 py-3 text-sm font-medium text-on-ink transition-colors hover:bg-accent-deep active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink-deep"
               >
-                Compose the note
+                Send the enquiry
                 <HugeiconsIcon
                   icon={ArrowRight01Icon}
                   size={15}
@@ -450,8 +459,8 @@ export default function ConsultationForm() {
                 />
               </button>
               <p className="max-w-[34ch] text-xs leading-relaxed text-faint">
-                This writes the enquiry. It does not transmit it — the next step
-                is your own mail client.
+                This opens your mail client with the note already written.
+                Nothing is collected or held on this page.
               </p>
             </motion.div>
           </motion.form>
