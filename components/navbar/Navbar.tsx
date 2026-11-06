@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -14,11 +15,47 @@ import {
 } from "@hugeicons/core-free-icons";
 import { MOBILE_NAV_LINKS, NAV_LINKS, PRACTICE_AREAS } from "@/lib/site";
 
+type DrawerLinkProps = {
+  href: string;
+  label: string;
+  current: boolean;
+  onClose: () => void;
+};
+
+function DrawerLink({ href, label, current, onClose }: DrawerLinkProps) {
+  return (
+    <Link
+      href={href}
+      onClick={onClose}
+      aria-current={current ? "page" : undefined}
+      className={`relative block rounded-lg py-2.5 pl-5 pr-3.5 text-sm font-medium transition-colors ${
+        current ? "text-accent" : "text-ink-soft hover:text-ink hover:bg-surface"
+      }`}
+    >
+      {current ? (
+        <span
+          aria-hidden
+          className="absolute inset-y-1.5 left-0 w-[2px] rounded-full bg-accent"
+        />
+      ) : null}
+      {label}
+    </Link>
+  );
+}
+
 export default function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [practiceOpen, setPracticeOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobilePracticeExpanded, setMobilePracticeExpanded] = useState(false);
+
+  // A nav entry stands for its whole section, so /practice/corporate-ma still
+  // reads as Practice Areas. The root has to be exact or it matches everything.
+  const isCurrent = (href: string) =>
+    href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname.startsWith(`${href}/`);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -87,6 +124,7 @@ export default function Navbar() {
             href="/"
             className="group flex items-center gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg p-1 -ml-1 transition-transform active:scale-[0.99]"
             aria-label="Crestview Chambers Home"
+            aria-current={pathname === "/" ? "page" : undefined}
           >
             <div className="relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-ink text-on-ink shadow-card border border-ink group-hover:bg-ink-raised transition-colors duration-200">
               <HugeiconsIcon
@@ -119,6 +157,7 @@ export default function Navbar() {
             aria-label="Main Navigation"
           >
             {NAV_LINKS.map((link) => {
+              const current = isCurrent(link.href);
               if (link.hasDropdown) {
                 return (
                   <div
@@ -131,13 +170,16 @@ export default function Navbar() {
                     <button
                       type="button"
                       onClick={() => setPracticeOpen((prev) => !prev)}
-                      className={`flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                      className={`relative flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                         practiceOpen
                           ? "text-ink bg-surface-2"
-                          : "text-body hover:text-ink hover:bg-surface"
+                          : current
+                            ? "text-accent"
+                            : "text-body hover:text-ink hover:bg-surface"
                       }`}
                       aria-expanded={practiceOpen}
                       aria-haspopup="true"
+                      aria-current={current ? "page" : undefined}
                     >
                       <span>{link.label}</span>
                       <motion.div
@@ -151,6 +193,12 @@ export default function Navbar() {
                           strokeWidth={1.8}
                         />
                       </motion.div>
+                      {current ? (
+                        <span
+                          aria-hidden
+                          className="absolute inset-x-3.5 bottom-1 h-px bg-accent"
+                        />
+                      ) : null}
                     </button>
 
                     {/* Practice Areas Mega Menu Dropdown */}
@@ -177,9 +225,14 @@ export default function Navbar() {
                               <Link
                                 href="/practice"
                                 onClick={() => setPracticeOpen(false)}
+                                aria-current={
+                                  pathname === "/practice" ? "page" : undefined
+                                }
                                 className="group flex items-center gap-1 text-xs font-semibold text-accent hover:text-accent-deep transition-colors"
                               >
-                                <span>View all {PRACTICE_AREAS.length} practices</span>
+                                <span className={pathname === "/practice" ? "underline underline-offset-4" : undefined}>
+                                  View all {PRACTICE_AREAS.length} practices
+                                </span>
                                 <HugeiconsIcon
                                   icon={ArrowRight01Icon}
                                   size={14}
@@ -192,14 +245,28 @@ export default function Navbar() {
 
                             {/* 2-Column Practice Areas Grid */}
                             <div className="grid grid-cols-2 gap-3">
-                              {PRACTICE_AREAS.map((area) => (
+                              {PRACTICE_AREAS.map((area) => {
+                                const href = `/practice/${area.slug}`;
+                                const onThisPage = pathname === href;
+                                return (
                                 <Link
                                   key={area.slug}
-                                  href={`/practice/${area.slug}`}
+                                  href={href}
                                   onClick={() => setPracticeOpen(false)}
-                                  className="group flex items-start gap-3.5 p-3 rounded-xl hover:bg-surface border border-transparent hover:border-rule transition-all duration-200"
+                                  aria-current={onThisPage ? "page" : undefined}
+                                  className={`group flex items-start gap-3.5 p-3 rounded-xl border transition-all duration-200 ${
+                                    onThisPage
+                                      ? "border-accent/30"
+                                      : "hover:bg-surface border-transparent hover:border-rule"
+                                  }`}
                                 >
-                                  <div className="w-9 h-9 rounded-lg bg-surface-2 group-hover:bg-ink text-ink-soft group-hover:text-on-ink flex items-center justify-center shrink-0 transition-colors mt-0.5">
+                                  <div
+                                    className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors mt-0.5 ${
+                                      onThisPage
+                                        ? "bg-accent text-on-ink"
+                                        : "bg-surface-2 text-ink-soft group-hover:bg-ink group-hover:text-on-ink"
+                                    }`}
+                                  >
                                     <HugeiconsIcon
                                       icon={area.icon}
                                       size={18}
@@ -208,7 +275,13 @@ export default function Navbar() {
                                     />
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <h4 className="text-sm font-semibold text-ink transition-colors">
+                                    <h4
+                                      className={`text-sm font-semibold transition-colors ${
+                                        onThisPage
+                                          ? "text-accent"
+                                          : "text-ink"
+                                      }`}
+                                    >
                                       {area.title}
                                     </h4>
                                     <p className="text-xs text-faint line-clamp-2 mt-0.5 leading-relaxed">
@@ -216,7 +289,8 @@ export default function Navbar() {
                                     </p>
                                   </div>
                                 </Link>
-                              ))}
+                                );
+                              })}
                             </div>
                           </div>
                         </motion.div>
@@ -230,9 +304,18 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="relative px-3.5 py-2 text-sm font-medium text-body hover:text-ink rounded-lg hover:bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  aria-current={current ? "page" : undefined}
+                  className={`relative px-3.5 py-2 text-sm font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                    current ? "text-accent" : "text-body hover:text-ink hover:bg-surface"
+                  }`}
                 >
                   {link.label}
+                  {current ? (
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-3.5 bottom-1 h-px bg-accent"
+                    />
+                  ) : null}
                 </Link>
               );
             })}
@@ -242,9 +325,18 @@ export default function Navbar() {
           <div className="hidden xl:flex items-center gap-3">
             <Link
               href="/contact"
+              aria-current={isCurrent("/contact") ? "page" : undefined}
               className="relative group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm text-on-ink bg-accent hover:bg-accent-deep active:scale-[0.98] shadow-card transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             >
-              <span className="tracking-wide">Book Consultation</span>
+              <span className="relative tracking-wide">
+                Book Consultation
+                {isCurrent("/contact") ? (
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-0 -bottom-1.5 h-px bg-on-ink/60"
+                  />
+                ) : null}
+              </span>
               <HugeiconsIcon
                 icon={ArrowRight01Icon}
                 size={16}
@@ -373,22 +465,38 @@ export default function Navbar() {
                         transition={{ duration: 0.25 }}
                         className="divide-y divide-rule-soft bg-paper"
                       >
-                        {PRACTICE_AREAS.map((area) => (
+                        {PRACTICE_AREAS.map((area) => {
+                          const onThisPage =
+                            pathname === `/practice/${area.slug}`;
+                          return (
                           <Link
                             key={area.slug}
                             href={`/practice/${area.slug}`}
                             onClick={() => setMobileMenuOpen(false)}
-                            className="flex items-start gap-3 p-3 hover:bg-surface transition-colors"
+                            aria-current={onThisPage ? "page" : undefined}
+                            className="relative flex items-start gap-3 p-3 pl-4 transition-colors hover:bg-surface"
                           >
+                            {onThisPage ? (
+                              <span
+                                aria-hidden
+                                className="absolute inset-y-0 left-0 w-[2px] bg-accent"
+                              />
+                            ) : null}
                             <HugeiconsIcon
                               icon={area.icon}
                               size={16}
-                              color="var(--faint)"
+                              color={
+                                onThisPage ? "var(--accent)" : "var(--faint)"
+                              }
                               strokeWidth={1.8}
                               className="mt-0.5 shrink-0"
                             />
                             <div>
-                              <p className="text-xs font-semibold text-ink">
+                              <p
+                                className={`text-xs font-semibold ${
+                                  onThisPage ? "text-accent" : "text-ink"
+                                }`}
+                              >
                                 {area.title}
                               </p>
                               <p className="text-[11px] text-faint line-clamp-1">
@@ -396,7 +504,8 @@ export default function Navbar() {
                               </p>
                             </div>
                           </Link>
-                        ))}
+                          );
+                        })}
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -404,22 +513,20 @@ export default function Navbar() {
 
                 {/* Other Nav Links */}
                 <div className="space-y-1">
-                  <Link
+                  <DrawerLink
                     href="/practice"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3.5 py-2.5 rounded-lg text-sm font-medium text-ink-soft hover:text-ink hover:bg-surface transition-colors"
-                  >
-                    All Practice Areas
-                  </Link>
+                    label="All Practice Areas"
+                    current={pathname === "/practice"}
+                    onClose={() => setMobileMenuOpen(false)}
+                  />
                   {MOBILE_NAV_LINKS.map((navItem) => (
-                    <Link
+                    <DrawerLink
                       key={navItem.href}
                       href={navItem.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block px-3.5 py-2.5 rounded-lg text-sm font-medium text-ink-soft hover:text-ink hover:bg-surface transition-colors"
-                    >
-                      {navItem.label}
-                    </Link>
+                      label={navItem.label}
+                      current={isCurrent(navItem.href)}
+                      onClose={() => setMobileMenuOpen(false)}
+                    />
                   ))}
                 </div>
 
@@ -428,9 +535,18 @@ export default function Navbar() {
                   <Link
                     href="/contact"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-accent text-on-ink font-medium text-sm hover:bg-accent-deep active:scale-[0.99] transition-all shadow-card"
+                    aria-current={isCurrent("/contact") ? "page" : undefined}
+                    className="relative w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-accent hover:bg-accent-deep text-on-ink font-medium text-sm active:scale-[0.99] transition-all shadow-card"
                   >
-                    <span>Book a Consultation</span>
+                    <span className="relative">
+                      Book a Consultation
+                      {isCurrent("/contact") ? (
+                        <span
+                          aria-hidden
+                          className="absolute inset-x-0 -bottom-1.5 h-px bg-on-ink/60"
+                        />
+                      ) : null}
+                    </span>
                     <HugeiconsIcon
                       icon={ArrowRight01Icon}
                       size={16}
