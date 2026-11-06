@@ -8,7 +8,7 @@ import Seats from "@/components/home/Seats";
 
 export default function Home() {
   return (
-    <div className="w-full">
+    <>
       <Hero />
       <Disciplines />
       <Credentials />
@@ -16,6 +16,6 @@ export default function Home() {
       <Briefs />
       <Seats />
       <ClosingCta />
-    </div>
+    </>
   );
 }

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import PageReveal from "@/components/page/PageReveal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-paper text-ink font-sans selection:bg-accent selection:text-on-ink">
         <Navbar />
+        <PageReveal />
         <main className="flex-1 w-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           {children}
         </main>

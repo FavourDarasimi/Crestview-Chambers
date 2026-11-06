@@ -31,6 +31,7 @@ export default function Hero() {
       variants={container}
       initial="hidden"
       animate="visible"
+      data-reveal="off"
       className="flex min-h-[calc(100svh_-_3rem)] w-full items-center bg-paper pt-10 pb-14 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24"
     >
       <div className="grid w-full grid-cols-1 items-center gap-y-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-x-10 lg:gap-y-0">
